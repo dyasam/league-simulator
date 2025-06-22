@@ -124,7 +124,7 @@
             </div>
         </div>
 
-        <div v-else-if="currentSimulation && weeklyMatches.length > 0">
+        <div v-else-if="currentSimulation && weeklyGames.length > 0">
             <div class="mb-6">
                 <h2 class="text-2xl font-bold text-gray-900 mb-2">
                     Current Simulation
@@ -159,11 +159,11 @@
                             Weekly Matches
                         </h3>
                         <div class="grid grid-cols-3 gap-4">
-                            <weekly-matches
-                                v-for="(matches, week) in weeklyMatches"
+                            <weekly-games
+                                v-for="(games, week) in weeklyGames"
                                 :key="week + 1"
                                 :week="week + 1"
-                                :matches="matches"
+                                :games="games"
                             />
                         </div>
                     </div>
@@ -197,14 +197,14 @@
 
 <script>
 import { ref, computed } from "vue";
-import WeeklyMatches from "./WeeklyMatches.vue";
+import WeeklyGames from "./WeeklyGames.vue";
 import StandingsTable from "./StandingsTable.vue";
 import PredictionsTable from "./PredictionsTable.vue";
 
 export default {
     name: "SimulationsView",
     components: {
-        WeeklyMatches,
+        WeeklyGames,
         StandingsTable,
         PredictionsTable,
     },
@@ -222,7 +222,7 @@ export default {
             return currentSimulation.value?.predictions || null;
         });
 
-        const weeklyMatches = computed(() => {
+        const weeklyGames = computed(() => {
             if (!currentSimulation.value || !currentSimulation.value.games) {
                 return [];
             }
@@ -329,7 +329,7 @@ export default {
             error,
             weekCount,
             predictions,
-            weeklyMatches,
+            weeklyGames,
             isAllWeeksPlayed,
             createSimulation,
             playAll,

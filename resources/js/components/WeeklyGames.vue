@@ -8,8 +8,8 @@
 
         <div class="divide-y divide-gray-200">
             <div
-                v-for="match in matchesArray"
-                :key="match.id"
+                v-for="game in gamesArray"
+                :key="game.id"
                 class="p-3 hover:bg-gray-50 transition-colors duration-150"
             >
                 <div class="space-y-2">
@@ -20,29 +20,29 @@
                             >
                                 <span class="text-white font-bold text-xs">
                                     {{
-                                        match.home_team?.name?.charAt(0) || "?"
+                                        game.home_team?.name?.charAt(0) || "?"
                                     }}
                                 </span>
                             </div>
                             <span class="font-medium text-gray-900 truncate">{{
-                                    match.home_team?.name || "Unknown"
+                                    game.home_team?.name || "Unknown"
                                 }}</span>
                         </div>
 
                         <div class="px-2 text-center">
                             <div
                                 v-if="
-                                    match.home_team_score !== null &&
-                                    match.away_team_score !== null
+                                    game.home_team_score !== null &&
+                                    game.away_team_score !== null
                                 "
                                 class="text-sm font-bold"
                             >
                                 <span class="text-blue-600">{{
-                                        match.home_team_score
+                                        game.home_team_score
                                     }}</span>
                                 <span class="text-gray-400 mx-1">-</span>
                                 <span class="text-red-600">{{
-                                        match.away_team_score
+                                        game.away_team_score
                                     }}</span>
                             </div>
                             <div v-else class="text-sm text-gray-400">vs</div>
@@ -52,14 +52,14 @@
                             class="flex items-center space-x-2 flex-1 min-w-0 justify-end"
                         >
                             <span class="font-medium text-gray-900 truncate">{{
-                                    match.away_team?.name || "Unknown"
+                                    game.away_team?.name || "Unknown"
                                 }}</span>
                             <div
                                 class="h-6 w-6 bg-gradient-to-r from-red-500 to-pink-500 rounded-full flex items-center justify-center flex-shrink-0"
                             >
                                 <span class="text-white font-bold text-xs">
                                     {{
-                                        match.away_team?.name?.charAt(0) || "?"
+                                        game.away_team?.name?.charAt(0) || "?"
                                     }}
                                 </span>
                             </div>
@@ -70,19 +70,19 @@
                         <span
                             class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium"
                             :class="
-                                match.is_simulated
+                                game.is_simulated
                                     ? 'bg-green-100 text-green-800'
                                     : 'bg-yellow-100 text-yellow-800'
                             "
                         >
-                            {{ match.is_simulated ? "Final" : "Scheduled" }}
+                            {{ game.is_simulated ? "Final" : "Scheduled" }}
                         </span>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div v-if="matchesArray.length === 0" class="p-8 text-center">
+        <div v-if="gamesArray.length === 0" class="p-8 text-center">
             <svg
                 class="mx-auto h-12 w-12 text-gray-400"
                 fill="none"
@@ -96,9 +96,9 @@
                     d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
                 />
             </svg>
-            <h3 class="mt-2 text-sm font-medium text-gray-900">No matches</h3>
+            <h3 class="mt-2 text-sm font-medium text-gray-900">No games</h3>
             <p class="mt-1 text-sm text-gray-500">
-                No matches scheduled for this week.
+                No games scheduled for this week.
             </p>
         </div>
     </div>
@@ -106,20 +106,20 @@
 
 <script>
 export default {
-    name: "WeeklyMatches",
+    name: "WeeklyGame",
     props: {
         week: {
             type: [String, Number],
             required: true,
         },
-        matches: {
+        games: {
             type: Array,
             default: () => [],
         },
     },
     computed: {
-        matchesArray() {
-            return this.matches[1] || [];
+        gamesArray() {
+            return this.games[1] || [];
         },
     },
 };
