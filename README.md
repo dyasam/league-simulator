@@ -43,6 +43,7 @@ docker compose exec app php artisan test
 - Redis
 - Docker
 - PHPUnit
+- Vue.js
 
 ## 📁 Folder Structure Highlights
 
